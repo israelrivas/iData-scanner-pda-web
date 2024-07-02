@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scanner Data Input</title>
+</head>
+<body>
+    <h1>Scanner Data</h1>
+    <input type="text" id="scannerInput" />
+    <div id="status"></div>
+    <script>
+        const socket = new WebSocket('ws://192.168.1.46:8080');
+
+        socket.onopen = function(event) {
+            document.getElementById('status').innerText = 'WebSocket connection opened.';
+            console.log('WebSocket connection opened.');
+        };
+
+        socket.onmessage = function(event) {
+            document.getElementById('scannerInput').value = event.data;
+            console.log('Message received:', event.data);
+        };
+
+        socket.onerror = function(event) {
+            document.getElementById('status').innerText = 'WebSocket error occurred.';
+            console.error('WebSocket error:', event);
+        };
+
+        socket.onclose = function(event) {
+            document.getElementById('status').innerText = 'WebSocket connection closed.';
+            console.log('WebSocket connection closed.');
+        };
+    </script>
+</body>
+</html>

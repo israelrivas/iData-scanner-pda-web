@@ -1,0 +1,3 @@
+<?php
+// Archivo temporalmente vacío
+?>
